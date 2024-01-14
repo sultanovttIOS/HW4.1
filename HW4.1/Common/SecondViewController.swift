@@ -59,7 +59,7 @@ class SecondViewController: UIViewController {
         setupEllipseImage()
         setupCheckMarkImage()
         setupKissVerticalImage()
-        setupSuccesLBL()
+        setupSuccessLBL()
     }
     
     private func setupKissImage() {
@@ -94,7 +94,7 @@ class SecondViewController: UIViewController {
         }
     }
     
-    private func setupSuccesLBL() {
+    private func setupSuccessLBL() {
         view.addSubview(successLabel)
         successLabel.snp.makeConstraints { make in
             make.top.equalTo(kissImage.snp.bottom).offset(10)

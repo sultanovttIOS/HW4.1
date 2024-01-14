@@ -89,7 +89,7 @@ class ViewController: UIViewController {
         return button
     }()
     
-    private lazy var ForgotButton: UIButton = {
+    private lazy var forgotButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = UIColor(hex: "##4B94EA")
         button.setTitle("Forgot Password?", for: .normal)
@@ -255,8 +255,8 @@ class ViewController: UIViewController {
     }
     
     private func setupForgotBTN() {
-        tfView.addSubview(ForgotButton)
-        ForgotButton.snp.makeConstraints { make in
+        tfView.addSubview(forgotButton)
+        forgotButton.snp.makeConstraints { make in
             make.top.equalTo(borderTF2.snp.bottom).offset(3)
             make.trailing.equalToSuperview().offset(-22)
             make.leading.equalToSuperview().offset(233)
