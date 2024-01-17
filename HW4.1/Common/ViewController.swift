@@ -100,7 +100,7 @@ class ViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(systemName: "square"), for: .normal)
         button.setImage(UIImage(systemName: "checkmark.square.fill"), for: .selected)
-        button.tintColor = UIColor(hex: "#000000") // Установите цвет изображения
+        button.tintColor = UIColor(hex: "#000000")
         button.addTarget(self, action: #selector(checkboxTapped), for: .touchUpInside)
         return button
     }()
@@ -121,7 +121,22 @@ class ViewController: UIViewController {
         button.backgroundColor = UIColor(hex: "#2855AE")
         return button
     }()
-        
+    
+    private lazy var dontHaveACTlabel: UILabel = {
+        let label = UILabel()
+        label.text = "Don’t have an Account?"
+        label.font = .systemFont(ofSize: 15, weight: .regular)
+        label.textColor = .black
+        return label
+    }()
+    
+    private lazy var signUpBTN: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Sign Up", for: .normal)
+        button.tintColor = .blue
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -147,24 +162,22 @@ class ViewController: UIViewController {
         setupCheckBTN()
         setupRememberLBL()
         setupSigInBTN()
+        setupDontHaveACTLabel()
+        setupSignUpBTN()
     }
     
     private func setupImage() {
         view.addSubview(imageView)
         imageView.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(50)
-            make.leading.equalToSuperview().offset(10)
-            make.width.equalTo(350)
-            make.height.equalTo(256)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(-26)
+            make.horizontalEdges.equalToSuperview()
         }
     }
     
     private func setupWelcomeLabel() {
         view.addSubview(welcomeLabel)
         welcomeLabel.snp.makeConstraints { make in
-            make.top.equalTo(imageView.snp.bottom).offset(0)
             make.leading.equalToSuperview().offset(15)
-            make.trailing.equalToSuperview().offset(-119)
             make.height.equalTo(48)
         }
     }
@@ -184,7 +197,8 @@ class ViewController: UIViewController {
         tfView.snp.makeConstraints { make in
             make.top.equalTo(signLabel.snp.bottom).offset(8)
             make.horizontalEdges.equalToSuperview().offset(0)
-            make.bottom.equalToSuperview()
+            make.bottom.equalTo(view.snp.bottom)
+            make.height.equalTo(442)
         }
     }
     
@@ -259,8 +273,8 @@ class ViewController: UIViewController {
         forgotButton.snp.makeConstraints { make in
             make.top.equalTo(borderTF2.snp.bottom).offset(3)
             make.trailing.equalToSuperview().offset(-22)
-            make.leading.equalToSuperview().offset(233)
-            make.height.equalTo(20)
+            make.leading.equalToSuperview().offset(230)
+            make.trailing.equalToSuperview().offset(-20)
         }
     }
     
@@ -297,6 +311,27 @@ class ViewController: UIViewController {
         signInButton.addTarget(self, action: #selector(showNextPage), for: .touchUpInside)
     }
     
+    private func setupDontHaveACTLabel() {
+        tfView.addSubview(dontHaveACTlabel)
+        dontHaveACTlabel.snp.makeConstraints { make in
+            make.top.equalTo(signInButton.snp.bottom).offset(45)
+            make.leading.equalTo(tfView.snp.leading).offset(11)
+            make.height.equalTo(16)
+            make.bottom.equalTo(tfView.snp.bottom).offset(-50)
+        }
+    }
+    
+    private func setupSignUpBTN() {
+        tfView.addSubview(signUpBTN)
+        signUpBTN.snp.makeConstraints { make in
+            make.top.equalTo(signInButton.snp.bottom).offset(45)
+            make.centerY.equalTo(dontHaveACTlabel.snp.centerY)
+            make.leading.equalTo(dontHaveACTlabel.snp.trailing)
+            make.height.equalTo(16)
+            make.trailing.equalTo(tfView.snp.trailing).offset(-145)
+            make.bottom.equalTo(tfView.snp.bottom).offset(-50)
+        }
+    }
     @objc func showNextPage(_ sender: UIButton) {
         guard let idText = idEmailTF.text, let passwordText = passwordTF.text else { return }
         
