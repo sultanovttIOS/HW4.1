@@ -276,6 +276,13 @@ class ViewController: UIViewController {
             make.leading.equalToSuperview().offset(230)
             make.trailing.equalToSuperview().offset(-20)
         }
+        
+        forgotButton.addTarget(self, action: #selector(showThirdPage), for: .touchUpInside)
+    }
+    
+    @objc func showThirdPage(sender: UIButton) {
+        
+        navigationController?.pushViewController(ThirdViewController(), animated: true)
     }
     
     private func setupCheckBTN() {
@@ -311,6 +318,25 @@ class ViewController: UIViewController {
         signInButton.addTarget(self, action: #selector(showNextPage), for: .touchUpInside)
     }
     
+    @objc func showNextPage(_ sender: UIButton) {
+        guard let idText = idEmailTF.text, let passwordText = passwordTF.text else { return }
+        
+        if idText.count < 4 {
+            idEmailTF.layer.borderColor = UIColor.red.cgColor
+            idEmailTF.layer.borderWidth = 1.0
+            idEmailTF.layer.cornerRadius = 5.0
+            idEmailTF.placeholder = "Пожалуйста, заполните поле!"
+        } else if passwordText.count < 4 {
+            passwordTF.layer.borderColor = UIColor.red.cgColor
+            passwordTF.layer.borderWidth = 1.0
+            passwordTF.layer.cornerRadius = 5.0
+            passwordTF.placeholder = "Пожалуйста, заполните поле!"
+        } else {
+            let vc = LastViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     private func setupDontHaveACTLabel() {
         tfView.addSubview(dontHaveACTlabel)
         dontHaveACTlabel.snp.makeConstraints { make in
@@ -331,23 +357,12 @@ class ViewController: UIViewController {
             make.trailing.equalTo(tfView.snp.trailing).offset(-145)
             make.bottom.equalTo(tfView.snp.bottom).offset(-50)
         }
-    }
-    @objc func showNextPage(_ sender: UIButton) {
-        guard let idText = idEmailTF.text, let passwordText = passwordTF.text else { return }
         
-        if idText.count < 4 {
-            idEmailTF.layer.borderColor = UIColor.red.cgColor
-            idEmailTF.layer.borderWidth = 1.0
-            idEmailTF.layer.cornerRadius = 5.0
-            idEmailTF.placeholder = "Пожалуйста, заполните поле!"
-        } else if passwordText.count < 4 {
-            passwordTF.layer.borderColor = UIColor.red.cgColor
-            passwordTF.layer.borderWidth = 1.0
-            passwordTF.layer.cornerRadius = 5.0
-            passwordTF.placeholder = "Пожалуйста, заполните поле!"
-        } else {
-            let vc = SecondViewController()
-            navigationController?.pushViewController(vc, animated: true)
-        }
+        signUpBTN.addTarget(self, action: #selector(showSecondPage), for: .touchUpInside)
+    }
+    
+    @objc func showSecondPage(sender: UIButton) {
+        
+        navigationController?.pushViewController(SecondViewController(), animated: true)
     }
 }

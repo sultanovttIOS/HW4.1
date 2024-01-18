@@ -17,9 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let nav1 = UINavigationController(rootViewController: ViewController())
+        let nav1 = UINavigationController(rootViewController: FourthViewController())
         
-        window.rootViewController = nav1 // синяя стрелка
+        window.rootViewController =  nav1 // синяя стрелка
         
         self.window = window
         
